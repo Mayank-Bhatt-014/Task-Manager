@@ -1,0 +1,19 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; background: #f6f8fa; margin: 0; padding: 20px; }
+.container { max-width: 700px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.header { display:flex; align-items:center; justify-content:space-between; }
+h1 { margin: 0; font-size: 20px; }
+.form-row { display:flex; gap:8px; margin-top:12px; }
+input[type="text"] { flex:1; padding:8px; border:1px solid #ddd; border-radius:4px; }
+button { padding:8px 12px; border:none; background:#0366d6; color:#fff; border-radius:4px; cursor:pointer; }
+button.secondary { background:#6a737d; }
+.task { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+.task .left { display:flex; align-items:center; gap:8px; }
+.task .title { font-size:14px; }
+.task .title.completed { text-decoration: line-through; color:#6a737d; }
+.small { font-size:12px; color:#6a737d; }
+.controls { display:flex; gap:8px; }
+.filter { margin-top:12px; display:flex; gap:8px; }
+.edit-input { padding:6px; border:1px solid #ddd; border-radius:4px; }
+.error { color:#b00020; margin-top:8px; }
+.loading { margin-top:12px; }
