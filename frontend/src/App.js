@@ -3,7 +3,9 @@ import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import Filter from './components/Filter';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+// Use a relative API base so the backend can serve frontend and API from same origin in production.
+// If you need to override (e.g., local dev), set REACT_APP_API_URL to a full URL.
+const API_BASE = process.env.REACT_APP_API_URL || '';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);

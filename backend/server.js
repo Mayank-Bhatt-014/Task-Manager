@@ -1,26 +1,36 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const tasksRouter = require('./routes/tasks');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+// Use PORT from environment (Render sets this) or fallback to 3001
+const PORT = process.env.PORT || 3001;
 
 // Middlewares
-app.use(cors());
+// Enable CORS only in development to allow the React dev server to talk to API
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors());
+}
+
 // Limit JSON size to avoid large payloads
 app.use(express.json({ limit: '10kb' }));
 
-// Routes
+// API routes
 app.use('/tasks', tasksRouter);
 
-// 404 handler
-app.use((req, res, next) => {
-  res.status(404).json({ success: false, error: 'Not Found' });
+// Serve static frontend build when deployed
+const buildPath = path.join(__dirname, '..', 'frontend', 'build');
+app.use(express.static(buildPath));
+
+// Catch-all: serve React app for client-side routing (must come after API routes)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
 
-// Error handler
+// Error handler (last)
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error(err && err.stack ? err.stack : err);
   res.status(500).json({ success: false, error: 'Server error' });
 });
 
